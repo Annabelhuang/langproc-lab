@@ -6,6 +6,8 @@
 // The types of tokens that our lexer will identify.
 enum TokenType 
 {
+  Comment,      // For comment tokens
+  Attribute,    // For attribute tokens
   Eof,          // end of file
   Other
 };

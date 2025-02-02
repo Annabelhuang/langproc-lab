@@ -53,6 +53,19 @@ public:
     { return "log"; }
     
     // TODO-E : Override evaluate, and implement it
+    virtual double evaluate(
+        const std::map<std::string,double> &bindings
+    ) const override
+    {
+        double vl = getArg()->evaluate(bindings);
+        
+        if (vl <= 0)
+        {
+            throw std::runtime_error("log of non-positive number is undefined");
+        }
+        
+        return std::log(vl); 
+    }
 };
 
 class ExpFunction
@@ -65,6 +78,16 @@ public:
 
     virtual const char *getFunction() const
     { return "exp"; }
+
+    virtual double evaluate(
+        const std::map<std::string,double> &bindings
+    ) const override
+    {
+        double vl = getArg()->evaluate(bindings);
+        
+        
+        return std::exp(vl); 
+    }
 };
 
 class SqrtFunction
@@ -75,8 +98,21 @@ public:
         : Function(_arg)
     {}
 
-    virtual const char *getFunction() const
+    virtual const char *getFunction() const 
     { return "sqrt"; }
+    virtual double evaluate(
+        const std::map<std::string,double> &bindings
+    ) const override
+    {
+        double vl = getArg()->evaluate(bindings);
+        
+        if (vl < 0)
+        {
+            throw std::runtime_error("sqrt of negative number is undefined");
+        }
+        
+        return std::sqrt(vl); 
+    }
 };
 
 

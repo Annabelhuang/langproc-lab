@@ -5,31 +5,41 @@
 
 // This is the yylval variable that the nocomment.hpp header file refers to.
 TokenValue yylval;
+extern int comment_count;
+extern int attribute_count;
 
 int main () { 
 
-  while (1) {
+    while (1) {
 
-    // Lex the next character in the input stream.
-    TokenType type = (TokenType) yylex();
+        // Lex the next character in the input stream.
+        TokenType type = (TokenType) yylex();
     
-    if (type == Eof) {
+        if (type == Eof) {
       
-      break;
-      
-    } else if (type == Other) {
+            break;
+        } 
+        else if (type == Comment || type == Attribute) {
+            // If it's a comment or attribute, we do not output anything,
+            // and just increment the appropriate counter.
+            if (type == Comment) {
+                comment_count++;
+            } else if (type == Attribute) {
+                attribute_count++;
+            }
+        }
 
-      std::cout << yylval.character;
-
-    } else {
-      
-      assert(0); // Error out!
-      return 1;
-      
+        else if (type == Other) {
+            std::cout << yylval.character;
+        } 
+        else {
+            assert(0); // Error out!
+            return 1;
+        }
     }
-  }
 
-  std::cout << "Number of comments and attributes removed: 0.\n";
+  std::cout << "Number of comments and attributes removed: "
+            << comment_count + attribute_count << ".\n";
     
   return 0;
 }
