@@ -81,8 +81,7 @@ extern int yydebug;
     T_EXP = 266,                   /* T_EXP  */
     T_SQRT = 267,                  /* T_SQRT  */
     T_NUMBER = 268,                /* T_NUMBER  */
-    T_VARIABLE = 269,              /* T_VARIABLE  */
-    NEG = 270                      /* NEG  */
+    T_VARIABLE = 269               /* T_VARIABLE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -97,7 +96,7 @@ union YYSTYPE
   double number;
   std::string *string;
 
-#line 101 "src/maths_parser.tab.hpp"
+#line 100 "src/maths_parser.tab.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

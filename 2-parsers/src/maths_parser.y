@@ -55,25 +55,20 @@ TERM : TERM T_TIMES UNARY { $$ = new MulOperator($1, $3); }
      | TERM T_DIVIDE UNARY { $$ = new DivOperator($1, $3); }
      | UNARY          { $$ = $1; }
 
-FACTOR : FACTOR T_EXPONENT UNARY { $$ = new ExpOperator($1, $3); } 
-       | UNARY;
+
 /*  TODO-5 : Add support for (- 5) and (- x). You'll need to add production rules for the unary minus operator and create a NegOperator. */
 
-UNARY : T_MINUS FACTOR %prec NEG { $$ = new NegOperator($2); }
-      | FACTOR                { $$ = $1; }
+UNARY :   T_MINUS UNARY { $$ = new NegOperator($2); }
+      |   UNARY T_EXPONENT UNARY { $$ = new ExpOperator($1, $3); }
+      |   FACTOR                { $$ = $1; }
       
 
 
 /* TODO-2 : Add a rule for variable, base on the pattern of number. */
-FACTOR : T_VARIABLE {$$ = new Variable(*$1); }
-       | T_LBRACKET EXPR T_RBRACKET { $$ = $2; }
-
-FACTOR : T_NUMBER     {   $$ = new Number( $1 );  }
-       | T_LBRACKET EXPR T_RBRACKET { $$ = $2; }
-
 /* TODO-6 : Add support log(x), by modifying the rule for FACTOR. */
 
-FACTOR : T_NUMBER               { $$ = new Number($1); }
+FACTOR : T_VARIABLE {$$ = new Variable(*$1); }
+       | T_NUMBER     {   $$ = new Number( $1 );  }
        | T_LBRACKET EXPR T_RBRACKET { $$ = $2; }
        | FUNCTION_NAME T_LBRACKET EXPR T_RBRACKET {
             if (*$1 == "log") {
@@ -84,7 +79,9 @@ FACTOR : T_NUMBER               { $$ = new Number($1); }
                 $$ = new SqrtFunction($3);
             }
         }
-       | T_VARIABLE             { $$ = new Variable(*$1); }
+
+
+
 /* TODO-7 : Extend support to other functions. Requires modifications here, and to FACTOR. */
 FUNCTION_NAME : T_LOG { $$ = new std::string("log"); }
               | T_EXP { $$ = new std::string("exp"); }

@@ -108,14 +108,13 @@ enum yysymbol_kind_t
   YYSYMBOL_T_SQRT = 12,                    /* T_SQRT  */
   YYSYMBOL_T_NUMBER = 13,                  /* T_NUMBER  */
   YYSYMBOL_T_VARIABLE = 14,                /* T_VARIABLE  */
-  YYSYMBOL_NEG = 15,                       /* NEG  */
-  YYSYMBOL_YYACCEPT = 16,                  /* $accept  */
-  YYSYMBOL_ROOT = 17,                      /* ROOT  */
-  YYSYMBOL_EXPR = 18,                      /* EXPR  */
-  YYSYMBOL_TERM = 19,                      /* TERM  */
+  YYSYMBOL_YYACCEPT = 15,                  /* $accept  */
+  YYSYMBOL_ROOT = 16,                      /* ROOT  */
+  YYSYMBOL_EXPR = 17,                      /* EXPR  */
+  YYSYMBOL_TERM = 18,                      /* TERM  */
+  YYSYMBOL_UNARY = 19,                     /* UNARY  */
   YYSYMBOL_FACTOR = 20,                    /* FACTOR  */
-  YYSYMBOL_UNARY = 21,                     /* UNARY  */
-  YYSYMBOL_FUNCTION_NAME = 22              /* FUNCTION_NAME  */
+  YYSYMBOL_FUNCTION_NAME = 21              /* FUNCTION_NAME  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -441,21 +440,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  17
+#define YYFINAL  16
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   29
+#define YYLAST   28
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  16
+#define YYNTOKENS  15
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  23
+#define YYNRULES  18
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  32
+#define YYNSTATES  31
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   270
+#define YYMAXUTOK   269
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -495,17 +494,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    43,    43,    48,    49,    50,    54,    55,    56,    58,
-      59,    62,    63,    68,    69,    71,    72,    76,    77,    78,
-      87,    89,    90,    91
+       0,    43,    43,    48,    49,    50,    54,    55,    56,    61,
+      62,    63,    70,    71,    72,    73,    86,    87,    88
 };
 #endif
 
@@ -523,8 +520,8 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "T_TIMES", "T_DIVIDE",
   "T_PLUS", "T_MINUS", "T_EXPONENT", "T_LBRACKET", "T_RBRACKET", "T_LOG",
-  "T_EXP", "T_SQRT", "T_NUMBER", "T_VARIABLE", "NEG", "$accept", "ROOT",
-  "EXPR", "TERM", "FACTOR", "UNARY", "FUNCTION_NAME", YY_NULLPTR
+  "T_EXP", "T_SQRT", "T_NUMBER", "T_VARIABLE", "$accept", "ROOT", "EXPR",
+  "TERM", "UNARY", "FACTOR", "FUNCTION_NAME", YY_NULLPTR
 };
 
 static const char *
@@ -539,7 +536,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-11)
+#define YYTABLE_NINF (-1)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -548,10 +545,10 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -5,    -5,    -5,    -6,    -6,    -6,    -6,    -6,     4,    12,
-      21,    15,    22,    20,    15,    -6,     5,    -6,    -5,    -5,
-      -5,    -5,    -5,    -5,    -6,    21,    21,    22,    22,    -6,
-       7,    -6
+      -5,    -5,    -5,    -6,    -6,    -6,    -6,    -6,     4,    18,
+      22,     8,    -6,     9,     8,     5,    -6,    -5,    -5,    -5,
+      -5,    -5,    -5,    -6,    22,    22,     8,     8,     8,     7,
+      -6
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -559,16 +556,16 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,    21,    22,    23,    15,    13,     0,     2,
-       5,    12,     8,     0,    11,    10,     0,     1,     0,     0,
-       0,     0,     0,     0,    14,     3,     4,     6,     7,     9,
-       0,    19
+       0,     0,     0,    16,    17,    18,    13,    12,     0,     2,
+       5,     8,    11,     0,     9,     0,     1,     0,     0,     0,
+       0,     0,     0,    14,     3,     4,     6,     7,    10,     0,
+      15
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -6,    -6,     0,     8,    14,    -1,    -6
+      -6,    -6,     0,    10,    -1,    -6,    -6
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -582,42 +579,40 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      15,     1,    16,     2,    17,     3,     4,     5,     6,     7,
-      18,    19,    18,    19,    24,    14,    31,    18,    19,    27,
-      28,    29,    22,    30,    20,    21,    25,    26,    23,   -10
+      14,     1,    15,     2,    16,     3,     4,     5,     6,     7,
+      17,    18,    17,    18,    23,    21,    30,    22,    26,    27,
+      28,     0,    29,    17,    18,    19,    20,    24,    25
 };
 
 static const yytype_int8 yycheck[] =
 {
        1,     6,     2,     8,     0,    10,    11,    12,    13,    14,
-       5,     6,     5,     6,     9,     1,     9,     5,     6,    20,
-      21,    22,     7,    23,     3,     4,    18,    19,     8,     7
+       5,     6,     5,     6,     9,     7,     9,     8,    19,    20,
+      21,    -1,    22,     5,     6,     3,     4,    17,    18
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     6,     8,    10,    11,    12,    13,    14,    17,    18,
-      19,    20,    21,    22,    20,    21,    18,     0,     5,     6,
-       3,     4,     7,     8,     9,    19,    19,    21,    21,    21,
-      18,     9
+       0,     6,     8,    10,    11,    12,    13,    14,    16,    17,
+      18,    19,    20,    21,    19,    17,     0,     5,     6,     3,
+       4,     7,     8,     9,    18,    18,    19,    19,    19,    17,
+       9
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    16,    17,    18,    18,    18,    19,    19,    19,    20,
-      20,    21,    21,    20,    20,    20,    20,    20,    20,    20,
-      20,    22,    22,    22
+       0,    15,    16,    17,    17,    17,    18,    18,    18,    19,
+      19,    19,    20,    20,    20,    20,    21,    21,    21
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     3,     3,     1,     3,     3,     1,     3,
-       1,     2,     1,     1,     3,     1,     3,     1,     3,     4,
-       1,     1,     1,     1
+       0,     2,     1,     3,     3,     1,     3,     3,     1,     2,
+       3,     1,     1,     1,     3,     4,     1,     1,     1
 };
 
 
@@ -1083,101 +1078,83 @@ yyreduce:
   case 2: /* ROOT: EXPR  */
 #line 43 "src/maths_parser.y"
             { g_root = (yyvsp[0].expr); }
-#line 1087 "src/maths_parser.tab.cpp"
+#line 1082 "src/maths_parser.tab.cpp"
     break;
 
   case 3: /* EXPR: EXPR T_PLUS TERM  */
 #line 48 "src/maths_parser.y"
                         { (yyval.expr) = new AddOperator((yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1093 "src/maths_parser.tab.cpp"
+#line 1088 "src/maths_parser.tab.cpp"
     break;
 
   case 4: /* EXPR: EXPR T_MINUS TERM  */
 #line 49 "src/maths_parser.y"
                          { (yyval.expr) = new SubOperator((yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1099 "src/maths_parser.tab.cpp"
+#line 1094 "src/maths_parser.tab.cpp"
     break;
 
   case 5: /* EXPR: TERM  */
 #line 50 "src/maths_parser.y"
                      { (yyval.expr) = (yyvsp[0].expr); }
-#line 1105 "src/maths_parser.tab.cpp"
+#line 1100 "src/maths_parser.tab.cpp"
     break;
 
   case 6: /* TERM: TERM T_TIMES UNARY  */
 #line 54 "src/maths_parser.y"
                           { (yyval.expr) = new MulOperator((yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1111 "src/maths_parser.tab.cpp"
+#line 1106 "src/maths_parser.tab.cpp"
     break;
 
   case 7: /* TERM: TERM T_DIVIDE UNARY  */
 #line 55 "src/maths_parser.y"
                            { (yyval.expr) = new DivOperator((yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1117 "src/maths_parser.tab.cpp"
+#line 1112 "src/maths_parser.tab.cpp"
     break;
 
   case 8: /* TERM: UNARY  */
 #line 56 "src/maths_parser.y"
                       { (yyval.expr) = (yyvsp[0].expr); }
-#line 1123 "src/maths_parser.tab.cpp"
+#line 1118 "src/maths_parser.tab.cpp"
     break;
 
-  case 9: /* FACTOR: FACTOR T_EXPONENT UNARY  */
-#line 58 "src/maths_parser.y"
-                                 { (yyval.expr) = new ExpOperator((yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1129 "src/maths_parser.tab.cpp"
+  case 9: /* UNARY: T_MINUS UNARY  */
+#line 61 "src/maths_parser.y"
+                        { (yyval.expr) = new NegOperator((yyvsp[0].expr)); }
+#line 1124 "src/maths_parser.tab.cpp"
     break;
 
-  case 11: /* UNARY: T_MINUS FACTOR  */
+  case 10: /* UNARY: UNARY T_EXPONENT UNARY  */
 #line 62 "src/maths_parser.y"
-                                 { (yyval.expr) = new NegOperator((yyvsp[0].expr)); }
-#line 1135 "src/maths_parser.tab.cpp"
+                                 { (yyval.expr) = new ExpOperator((yyvsp[-2].expr), (yyvsp[0].expr)); }
+#line 1130 "src/maths_parser.tab.cpp"
     break;
 
-  case 12: /* UNARY: FACTOR  */
+  case 11: /* UNARY: FACTOR  */
 #line 63 "src/maths_parser.y"
-                              { (yyval.expr) = (yyvsp[0].expr); }
-#line 1141 "src/maths_parser.tab.cpp"
+                                { (yyval.expr) = (yyvsp[0].expr); }
+#line 1136 "src/maths_parser.tab.cpp"
     break;
 
-  case 13: /* FACTOR: T_VARIABLE  */
-#line 68 "src/maths_parser.y"
+  case 12: /* FACTOR: T_VARIABLE  */
+#line 70 "src/maths_parser.y"
                     {(yyval.expr) = new Variable(*(yyvsp[0].string)); }
-#line 1147 "src/maths_parser.tab.cpp"
+#line 1142 "src/maths_parser.tab.cpp"
+    break;
+
+  case 13: /* FACTOR: T_NUMBER  */
+#line 71 "src/maths_parser.y"
+                      {   (yyval.expr) = new Number( (yyvsp[0].number) );  }
+#line 1148 "src/maths_parser.tab.cpp"
     break;
 
   case 14: /* FACTOR: T_LBRACKET EXPR T_RBRACKET  */
-#line 69 "src/maths_parser.y"
-                                    { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1153 "src/maths_parser.tab.cpp"
-    break;
-
-  case 15: /* FACTOR: T_NUMBER  */
-#line 71 "src/maths_parser.y"
-                      {   (yyval.expr) = new Number( (yyvsp[0].number) );  }
-#line 1159 "src/maths_parser.tab.cpp"
-    break;
-
-  case 16: /* FACTOR: T_LBRACKET EXPR T_RBRACKET  */
 #line 72 "src/maths_parser.y"
                                     { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1165 "src/maths_parser.tab.cpp"
+#line 1154 "src/maths_parser.tab.cpp"
     break;
 
-  case 17: /* FACTOR: T_NUMBER  */
-#line 76 "src/maths_parser.y"
-                                { (yyval.expr) = new Number((yyvsp[0].number)); }
-#line 1171 "src/maths_parser.tab.cpp"
-    break;
-
-  case 18: /* FACTOR: T_LBRACKET EXPR T_RBRACKET  */
-#line 77 "src/maths_parser.y"
-                                    { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1177 "src/maths_parser.tab.cpp"
-    break;
-
-  case 19: /* FACTOR: FUNCTION_NAME T_LBRACKET EXPR T_RBRACKET  */
-#line 78 "src/maths_parser.y"
+  case 15: /* FACTOR: FUNCTION_NAME T_LBRACKET EXPR T_RBRACKET  */
+#line 73 "src/maths_parser.y"
                                                   {
             if (*(yyvsp[-3].string) == "log") {
                 (yyval.expr) = new LogFunction((yyvsp[-1].expr));
@@ -1187,35 +1164,29 @@ yyreduce:
                 (yyval.expr) = new SqrtFunction((yyvsp[-1].expr));
             }
         }
-#line 1191 "src/maths_parser.tab.cpp"
+#line 1168 "src/maths_parser.tab.cpp"
     break;
 
-  case 20: /* FACTOR: T_VARIABLE  */
-#line 87 "src/maths_parser.y"
-                                { (yyval.expr) = new Variable(*(yyvsp[0].string)); }
-#line 1197 "src/maths_parser.tab.cpp"
-    break;
-
-  case 21: /* FUNCTION_NAME: T_LOG  */
-#line 89 "src/maths_parser.y"
+  case 16: /* FUNCTION_NAME: T_LOG  */
+#line 86 "src/maths_parser.y"
                       { (yyval.string) = new std::string("log"); }
-#line 1203 "src/maths_parser.tab.cpp"
+#line 1174 "src/maths_parser.tab.cpp"
     break;
 
-  case 22: /* FUNCTION_NAME: T_EXP  */
-#line 90 "src/maths_parser.y"
+  case 17: /* FUNCTION_NAME: T_EXP  */
+#line 87 "src/maths_parser.y"
                       { (yyval.string) = new std::string("exp"); }
-#line 1209 "src/maths_parser.tab.cpp"
+#line 1180 "src/maths_parser.tab.cpp"
     break;
 
-  case 23: /* FUNCTION_NAME: T_SQRT  */
-#line 91 "src/maths_parser.y"
+  case 18: /* FUNCTION_NAME: T_SQRT  */
+#line 88 "src/maths_parser.y"
                       { (yyval.string) = new std::string("sqrt"); }
-#line 1215 "src/maths_parser.tab.cpp"
+#line 1186 "src/maths_parser.tab.cpp"
     break;
 
 
-#line 1219 "src/maths_parser.tab.cpp"
+#line 1190 "src/maths_parser.tab.cpp"
 
       default: break;
     }
@@ -1408,7 +1379,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 93 "src/maths_parser.y"
+#line 90 "src/maths_parser.y"
 
 
 const Expression *g_root; // Definition of variable (to match declaration earlier)
