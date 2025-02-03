@@ -364,12 +364,12 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[32] =
+static const flex_int16_t yy_accept[35] =
     {   0,
         0,    0,   16,   14,   13,   13,    6,    7,    1,    2,
         4,    5,   11,    3,   12,   12,   12,   12,   13,   11,
-       11,   12,   12,   12,   12,   11,    9,    8,   12,   10,
-        0
+       11,    0,   12,   12,   12,   12,   11,    0,   11,    9,
+        8,   12,   10,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -411,42 +411,44 @@ static const YY_CHAR yy_meta[24] =
         2,    2,    2
     } ;
 
-static const flex_int16_t yy_base[33] =
+static const flex_int16_t yy_base[36] =
     {   0,
-        0,    0,   44,   45,   22,   24,   45,   45,   45,   45,
-       45,   45,   19,   45,    0,   20,   25,   22,   29,   29,
-       24,    0,   21,   23,   17,   25,    0,    0,   12,    0,
-       45,   27
+        0,    0,   53,   54,   22,   24,   54,   54,   54,   54,
+       54,   54,   19,   54,    0,   29,   34,   31,   29,   23,
+       27,   32,    0,   31,   33,   27,   31,   35,   33,    0,
+        0,   13,    0,   54,   27
     } ;
 
-static const flex_int16_t yy_def[33] =
+static const flex_int16_t yy_def[36] =
     {   0,
-       31,    1,   31,   31,   31,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   32,   32,   32,   32,   31,   31,
-       31,   32,   32,   32,   32,   31,   32,   32,   32,   32,
-        0,   31
+       34,    1,   34,   34,   34,   34,   34,   34,   34,   34,
+       34,   34,   34,   34,   35,   35,   35,   35,   34,   34,
+       34,   34,   35,   35,   35,   35,   34,   34,   34,   35,
+       35,   35,   35,    0,   34
     } ;
 
-static const flex_int16_t yy_nxt[69] =
+static const flex_int16_t yy_nxt[78] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,    4,   12,
        13,   14,   15,   16,   15,   17,   15,   15,   15,   15,
-       18,   15,   15,   19,   19,   19,   19,   20,   22,   21,
-       19,   19,   20,   30,   21,   26,   29,   28,   27,   26,
-       25,   24,   23,   31,    3,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31
+       18,   15,   15,   19,   19,   19,   19,   20,   23,   21,
+       19,   19,   22,   27,   33,   20,   22,   21,   28,   28,
+       22,   27,   29,   29,   22,   29,   32,   31,   30,   26,
+       25,   24,   34,    3,   34,   34,   34,   34,   34,   34,
+       34,   34,   34,   34,   34,   34,   34,   34,   34,   34,
+       34,   34,   34,   34,   34,   34,   34
     } ;
 
-static const flex_int16_t yy_chk[69] =
+static const flex_int16_t yy_chk[78] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    5,    5,    6,    6,   13,   32,   13,
-       19,   19,   21,   29,   21,   26,   25,   24,   23,   20,
-       18,   17,   16,    3,   31,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31
+        1,    1,    1,    5,    5,    6,    6,   13,   35,   13,
+       19,   19,   13,   20,   32,   21,   20,   21,   22,   22,
+       21,   27,   22,   29,   27,   28,   26,   25,   24,   18,
+       17,   16,    3,   34,   34,   34,   34,   34,   34,   34,
+       34,   34,   34,   34,   34,   34,   34,   34,   34,   34,
+       34,   34,   34,   34,   34,   34,   34
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -469,8 +471,8 @@ char *yytext;
 extern "C" int fileno(FILE *stream);
 
 #include "maths_parser.tab.hpp"
-#line 473 "src/maths_lexer.yy.cpp"
-#line 474 "src/maths_lexer.yy.cpp"
+#line 475 "src/maths_lexer.yy.cpp"
+#line 476 "src/maths_lexer.yy.cpp"
 
 #define INITIAL 0
 
@@ -689,7 +691,7 @@ YY_DECL
 	{
 #line 10 "src/maths_lexer.flex"
 
-#line 693 "src/maths_lexer.yy.cpp"
+#line 695 "src/maths_lexer.yy.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -716,13 +718,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 32 )
+				if ( yy_current_state >= 35 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 45 );
+		while ( yy_base[yy_current_state] != 54 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -809,20 +811,20 @@ YY_RULE_SETUP
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 27 "src/maths_lexer.flex"
+#line 28 "src/maths_lexer.flex"
 {;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "src/maths_lexer.flex"
+#line 30 "src/maths_lexer.flex"
 { fprintf(stderr, "Invalid token\n"); exit(1); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "src/maths_lexer.flex"
+#line 31 "src/maths_lexer.flex"
 ECHO;
 	YY_BREAK
-#line 826 "src/maths_lexer.yy.cpp"
+#line 828 "src/maths_lexer.yy.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1119,7 +1121,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 32 )
+			if ( yy_current_state >= 35 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1147,11 +1149,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 32 )
+		if ( yy_current_state >= 35 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 31);
+	yy_is_jam = (yy_current_state == 34);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1827,7 +1829,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 30 "src/maths_lexer.flex"
+#line 31 "src/maths_lexer.flex"
 
 
 void yyerror (char const *s)

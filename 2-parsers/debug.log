@@ -1,0 +1,117 @@
+/usr/bin/dos2unix
+========================================
+ Cleaning the temporaries and outputs
+rm src/*.o
+rm bin/*
+rm src/*.tab.cpp
+rm src/*.yy.cpp
+rm src/maths_parser.output
+rm src/maths_parser.tab.hpp
+ Force building bin/print_canonical
+g++  -std=c++11 -W -Wall -g -Wno-unused-parameter -I include  -c -o src/print_canonical.o src/print_canonical.cpp
+bison -v -d src/maths_parser.y -o src/maths_parser.tab.cpp
+g++  -std=c++11 -W -Wall -g -Wno-unused-parameter -I include  -c -o src/maths_parser.tab.o src/maths_parser.tab.cpp
+bison -v -d src/maths_parser.y -o src/maths_parser.tab.cpp
+flex -o src/maths_lexer.yy.cpp  src/maths_lexer.flex
+g++  -std=c++11 -W -Wall -g -Wno-unused-parameter -I include  -c -o src/maths_lexer.yy.o src/maths_lexer.yy.cpp
+mkdir -p bin
+g++ -std=c++11 -W -Wall -g -Wno-unused-parameter -I include -o bin/print_canonical src/print_canonical.o src/maths_parser.tab.o src/maths_lexer.yy.o
+g++  -std=c++11 -W -Wall -g -Wno-unused-parameter -I include  -c -o src/eval_expr.o src/eval_expr.cpp
+mkdir -p bin
+g++ -std=c++11 -W -Wall -g -Wno-unused-parameter -I include -o bin/eval_expr src/eval_expr.o src/maths_parser.tab.o src/maths_lexer.yy.o
+
+=========================================
+Checking that good expressions are parsed
+===========================
+
+Input : sqrt(2) + sqrt(3)
+Output : ( sqrt( 2 ) + sqrt( 3 ) )
+
+Evaluating with : 
+Value : 3.146264
+===========================
+
+Input : sqrt(x^2)
+Output : sqrt( ( x ^ 2 ) )
+
+Evaluating with : x -3
+Value : 3.000000
+===========================
+
+Input : sqrt(x^y)
+Output : sqrt( ( x ^ y ) )
+
+Evaluating with : x 9 y 2
+Value : 9.000000
+===========================
+
+Input : exp(log(x^y))
+Output : exp( log( ( x ^ y ) ) )
+
+Evaluating with : x 2 y 3
+Value : 8.000000
+===========================
+
+Input : log(exp(log(exp(x))))
+Output : log( exp( log( exp( x ) ) ) )
+
+Evaluating with : x 10
+Value : 10.000000
+===========================
+
+Input : log(0.0001)
+Output : log( 0.0001 )
+
+Evaluating with : 
+Value : -9.210340
+
+ERROR
+===========================
+
+Input : log(1000000)
+Output : log( 1e+06 )
+
+Evaluating with : 
+Value : 13.815511
+===========================
+
+Input : exp(-10)
+Output : exp( ( - 10 ) )
+
+Evaluating with : 
+Value : 0.000045
+===========================
+
+Input : exp(x*y^z)
+Output : exp( ( x * ( y ^ z ) ) )
+
+Evaluating with : x 2 y 3 z 2
+Value : 65659969.137331
+===========================
+
+Input : (x^y)^z
+Output : ( ( x ^ y ) ^ z )
+
+Evaluating with : x 2 y 3 z 2
+Value : 64.000000
+===========================
+
+Input : (x+y)*(x-y)/(x*y)
+Output : ( ( ( x + y ) * ( x - y ) ) / ( x * y ) )
+
+Evaluating with : x 6 y 4
+Value : 0.833333
+===========================
+
+Input : x/y+z
+Output : ( ( x / y ) + z )
+
+Evaluating with : x 9 y 3 z 1
+Value : 4.000000
+
+============================================
+Checking that bad expressions are not parsed
+
+########################################
+Passed 23 out of 24 checks.
+
